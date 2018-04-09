@@ -10,14 +10,62 @@
 <body>
 <div id="example"></div>
 <script type="text/babel">
-    ReactDOM.render(
-        <div>
-            <h1>菜鸟教程</h1>
-            <h2>欢迎学习 React</h2>
-            <p data-myattribute = "somevalue">这是一个很不错的 JavaScript 库!</p>
-        </div>,
-        document.getElementById('example')
-    );
+//    var WebSite = React.createClass({
+//        render: function() {
+//            return (
+//                    <div>
+//                        <Name name={this.props.name} />
+//                        <Link site={this.props.site} />
+//                    </div>
+//            );
+//        }
+//    });
+//
+//    var Name = React.createClass({
+//        render: function() {
+//            return (
+//                    <h1>{this.props.name}</h1>
+//            );
+//        }
+//    });
+//
+//    var Link = React.createClass({
+//        render: function() {
+//            return (
+//                    <a href={this.props.site}>
+//                        {this.props.site}
+//                    </a>
+//            );
+//        }
+//    });
+//
+//    ReactDOM.render(
+//            <WebSite name="菜鸟教程" site=" http://www.runoob.com" />,
+//        document.getElementById('example')
+//    );
+
+
+var LikeButton = React.createClass({
+    getInitialState: function() {
+        return {liked: false};
+    },
+    handleClick: function(event) {
+        this.setState({liked: !this.state.liked});
+    },
+    render: function() {
+        var text = this.state.liked ? '喜欢' : '不喜欢';
+        return (
+                <p onClick={this.handleClick}>
+                    你<b>{text}</b>我。点我切换状态。
+                </p>
+        );
+    }
+});
+
+ReactDOM.render(
+        <LikeButton />,
+    document.getElementById('example')
+);
 </script>
 </body>
 </html>
