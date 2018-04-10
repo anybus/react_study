@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello React!</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+
+    var UserGist = React.createClass({
+        getInitialState: function() {
+            return {
+                username: '',
+                lastGistUrl: ''
+            };
+        },
+
+        componentDidMount: function() {
+
+            this.serverRequest = axios.get(this.props.source,
+                {
+                    headers: { 'Access-Control-Allow-Origin': '*'}
+                }
+            ).then( (response) => {
+                console.log("response", response);
+
+            });
+
+        },
+
+        componentWillUnmount: function() {
+            this.serverRequest.abort();
+        },
+
+        render: function() {
+            return (
+                <div>
+                    {this.state.username} 用户最新的 Gist 共享地址：
+                    <a href={this.state.lastGistUrl}>{this.state.lastGistUrl}</a>
+                </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+        <UserGist source="http://10.202.43.228:3000/getkey?adcode=440300&address=%E6%B1%9F%E8%8B%8F%E7%9C%81%E6%B1%9F%E8%8B%8F%E7%9C%81%E8%8B%8F%E5%B7%9E%E5%B8%82%E5%90%B4%E4%B8%AD%E5%8C%BA%E7%94%AA%E7%9B%B4%E9%95%87%E6%B5%B7%E8%97%8F%E8%A5%BF%E8%B7%AF2018-9%E5%B9%A2%E4%B8%8D%E5%85%81%E8%AE%B8%E8%83%B6%E5%B8%A6%E7%BC%A0%E7%BB%95%E6%9C%BA%E5%99%A8" />,
+        document.getElementById('example')
+    );
+</script>
+</body>
+</html>
+
+<!--
+    1. react.min.js - React 的核心库
+react-dom.min.js - 提供与 DOM 相关的功能
+babel.min.js - Babel 可以将 ES6 代码转为 ES5 代码，这样我们就能在目前不支持 ES6 浏览器上执行 React 代码。Babel 内嵌了对 JSX 的支持。
+
+
+-->
