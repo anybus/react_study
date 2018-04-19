@@ -17,13 +17,17 @@ class App extends Component {
     }
 
     toggleTodo(id){
+        console.log(id+"to upper")
         this.setState({
             todos: this.state.todos.map(todo =>
-                (todo.id === id)
-                    ? {...todo, completed: !todo.completed}
-                    : todo
+                {
+                    return (todo.id == id)
+                        ? {...todo, completed: !todo.completed}
+                        : todo
+                }
             )
         })
+        console.log(this.state.todos)
     }
 
     handleSubmit1(text) {
@@ -68,6 +72,7 @@ class App extends Component {
                 {
                     this.state.todos.map(todo =>
                         <li
+                            key={todo.id}
                             style={{
                                 textDecoration: todo.completed ? 'line-through' : 'none'
                             }}

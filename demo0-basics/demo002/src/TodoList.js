@@ -7,6 +7,7 @@ class TodoList extends Component{
     }
 
     toggleTodo(e){
+        console.log(e)
         let id = e.target.id
         console.log(id)
         this.props.toggleTodo(id)
@@ -17,6 +18,8 @@ class TodoList extends Component{
             {
                 this.props.todos.map(todo =>
                     <li
+                        id={todo.id}
+                        key={todo.id}
                         onClick={this.toggleTodo}
                         style={{
                             textDecoration:todo.completed?"line-through":"none"
